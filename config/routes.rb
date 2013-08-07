@@ -1,4 +1,8 @@
 Statusboard::Application.routes.draw do
+  resources :boards do
+    resources :widgets
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

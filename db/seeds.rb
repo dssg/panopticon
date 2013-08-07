@@ -3,5 +3,18 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+#   cities = City.create([{ name:'Chicago' }, { title:'Copenhagen' }])
+#   Mayor.create(title:'Emanuel', city: cities.first)
+
+
+Board.create(title:"DSSG", content: "First Try", 
+  widgets: [
+    Widget.new(title:"First Text", location: [0,0], size: [200, 200], widgettype: "text", 
+      params: {content:"first sample text"}),
+    Widget.new(title:"Second Text", location: [0,0], size: [200, 200], widgettype: "text"),
+#    Widget.new(location: [200,200], size: [200, 200], widgettype: "twitter", :params => {username:"datascifellows", limit: 5})
+    Widget.new(title:"DSSG Flickr", location: [200,200], size: [200, 200], widgettype: "flickr", 
+      :params => {}),
+    Widget.new(title:"Until End of Program", location: [200,200], size: [200, 200], widgettype: "countdown", 
+      :params => {date: 1377248400})
+  ])

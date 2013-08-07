@@ -12,4 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
+//= require twitter/bootstrap/bootstrap-modal
+//= require twitter/bootstrap/bootstrap-transition
+//= require jquery.ui.all
+//= require jquery.jeditable
+//= require jquery.countdown
+//= require jquery.slides
+//= require jquery.jsoneditor
+//= require bootbox.min
 //= require_tree .
