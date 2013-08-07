@@ -75,6 +75,9 @@ function addDialog(widget){
       }
     }); 
   } else if (widget.widgettype === "flickr"){
+    $(domString).html('<iframe align="center" src="http://www.flickr.com/slideShow/index.gne?user_id=97358734@N03" width="'+ widget.size[0] +'" height="' + widget.size[1] +'" frameBorder="0" scrolling="no"></iframe><br />');
+      return;
+
     $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: "97358734@N03", format: "json" },
       function(data) {
       $.each(data.items, function(i,item){
@@ -82,8 +85,8 @@ function addDialog(widget){
             $("<img/>").attr({src : item.media.m.replace('_m.','.')}).appendTo(domString);
       });
      $(domString).slidesjs({
-        width     : 400,
-        height    : 208,
+        width     : params.size[0],
+        height    : params.size[1],
         navigation: {
           active  : false,
           effect  : "slide"
@@ -93,7 +96,7 @@ function addDialog(widget){
         },
         play      : {
           auto    : true,
-          interval: 1000,
+          interval: params.interval || 5000,
         }
       });
     });
