@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Location:</b>
+  <%= @widget.location %>
+</p>
+
+<p>
+  <b>Params:</b>
+  <%= @widget.params %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%= @widget.size %>
+</p>
+
+<p>
+  <b>Widgettype:</b>
+  <%= @widget.widgettype %>
+</p>
+
+
+<%= link_to 'Edit', edit_widget_path(@widget) %> |
+<%= link_to 'Back', widgets_path %>
