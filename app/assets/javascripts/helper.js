@@ -75,8 +75,8 @@ function addDialog(widget){
       }
     }); 
   } else if (widget.widgettype === "flickr"){
-    $(domString).html('<iframe align="center" src="http://www.flickr.com/slideShow/index.gne?user_id=97358734@N03" width="'+ widget.size[0] +'" height="' + widget.size[1] +'" frameBorder="0" scrolling="no"></iframe><br />');
-      return;
+    // $(domString).html('<iframe align="center" src="http://www.flickr.com/slideShow/index.gne?user_id=97358734@N03" width="'+ widget.size[0] +'" height="' + widget.size[1] +'" frameBorder="0" scrolling="no"></iframe><br />');
+      // return;
 
     $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",{id: "97358734@N03", format: "json" },
       function(data) {
