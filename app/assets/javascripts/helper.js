@@ -85,8 +85,8 @@ function addDialog(widget){
             $("<img/>").attr({src : item.media.m.replace('_m.','.')}).appendTo(domString);
       });
      $(domString).slidesjs({
-        width     : params.size[0],
-        height    : params.size[1],
+        width     : 400,
+        height    : 200,
         navigation: {
           active  : false,
           effect  : "slide"
