@@ -20,5 +20,7 @@
 //= require jquery.countdown
 //= require jquery.slides
 //= require jquery.jsoneditor
+//= require jquery.gridster
 //= require bootbox.min
+//= require sprintf
 //= require_tree .

@@ -13,6 +13,7 @@
  *= require jquery.ui.all
  *= require jquery.countdown
  *= require jsoneditor
+ *= require jquery.gridster
  *= require bootstrap_and_overrides
  *= require_tree .
  */
