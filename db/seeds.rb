@@ -11,7 +11,7 @@ Board.create(title:"DSSG", content: "First Try",
   widgets: [
     Widget.new(title:"First Text", location: [3, 3], size: [2, 2], widgettype: "text", 
       params: {content:"first sample text"}),
-    Widget.new(title:"Second Text", location: [3, 1], size: [2, 2], widgettype: "text"),
+    # Widget.new(title:"Second Text", location: [3, 1], size: [2, 2], widgettype: "text"),
     # Widget.new(titlelocation: [200,200], size: [200, 200], widgettype: "twitter", :params => {username:"datascifellows", limit: 5})
     Widget.new(title:"DSSG Flickr", location: [5, 1], size: [2, 2], widgettype: "flickr", 
       :params => {}),
