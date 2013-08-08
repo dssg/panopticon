@@ -16,5 +16,7 @@ Board.create(title:"DSSG", content: "First Try",
     Widget.new(title:"DSSG Flickr", location: [5, 1], size: [2, 2], widgettype: "flickr", 
       :params => {}),
     Widget.new(title:"Until End of Program", location: [1, 1], size: [2, 2], widgettype: "countdown", 
-      :params => {date: 1377248400})
+      :params => {date: 1377248400}),
+    Widget.new(title: "Image", location: [6,6], size: [2,2], widgettype: "image-dynamic",
+      params: {url: "http://placehold.it/350x150"})
   ])
