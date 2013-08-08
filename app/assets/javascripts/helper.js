@@ -3,6 +3,14 @@ MYAPP.update_widget = function (widget_id, json) {
     PUT(window.location.pathname + '/widgets/' + widget_id, json);
 };
 
+MYAPP.changesFormat = function(orig){
+  return {location: [orig.row, orig.col], size: [orig.size_x, orig.size_y]};
+// col: 1
+// id: "widgetid-5202b1c52a5043f91d000005"
+// row: 1
+// size_x: 2
+// size_y: 2
+};
 
 function createBox(widget) {
 
