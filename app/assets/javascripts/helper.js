@@ -35,6 +35,7 @@ MYAPP.change_size = function (widget, elem, offset) {
 }
 
 function createBox(widget) {
+  console.log("creating box");
 
   var currentDiv = "#widgetid-" + widget._id;
   var params = widget.params;
@@ -111,7 +112,7 @@ function makeWidget(widget) {
       MYAPP.setIndex = 0;
       loadMoreSets(domString);
 
-      console.log(data);
+      // console.log(data);
     });
   } else if (widget.widgettype === "countdown") {
     $(domString).countdown({
@@ -156,7 +157,7 @@ function loadMoreSets(domString){
     nojsoncallback: 1,
     per_page: 50
   }, function (data) {
-    console.log(data.photoset.photo);
+    // console.log(data.photoset.photo);
 
     $.each(data.photoset.photo, function (i, item) {
       $("<img/>").attr({
@@ -164,7 +165,7 @@ function loadMoreSets(domString){
       }).appendTo(domString);
     });
 
-    console.log("done");
+    // console.log("done");
 
     loadSlideJS(domString);
   });

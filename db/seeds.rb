@@ -7,7 +7,7 @@
 #   Mayor.create(title:'Emanuel', city: cities.first)
 
 
-Board.create(title:"DSSG", content: "First Try", 
+Board.create(title:"DSSG", content: "Second Try", 
   widgets: [
     Widget.new(title:"First Text", location: [3, 3], size: [2, 2], widgettype: "text", 
       params: {content:"first sample text"}),
@@ -18,5 +18,5 @@ Board.create(title:"DSSG", content: "First Try",
     Widget.new(title:"Until End of Program", location: [1, 1], size: [2, 2], widgettype: "countdown", 
       :params => {date: 1377248400}),
     Widget.new(title: "Image", location: [6,6], size: [2,2], widgettype: "image-dynamic",
-      params: {url: "https://dl.dropboxusercontent.com/u/59988827/cloud_large.png"})
+      params: {url: "https://dl.dropboxusercontent.com/u/59988827/cloud_large.png", interval: 5000})
   ])
