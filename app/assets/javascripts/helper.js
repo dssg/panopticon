@@ -1,12 +1,17 @@
 MYAPP = {};
+MYAPP.flickr_api_key = "302a4a49d1f85726239821d77caa7f50";
 
 MYAPP.update_widget = function (widget_id, json) {
   PUT(window.location.pathname + '/widgets/' + widget_id, json);
 };
 
 MYAPP.directions = ['right', 'left', 'down', 'up'];
-MYAPP.offsets = [[1, 0], [-1, 0], [0, 1], [0, -1]];
-
+MYAPP.offsets = [
+  [1, 0],
+  [-1, 0],
+  [0, 1],
+  [0, -1]
+];
 
 MYAPP.format_changes = function (orig) {
   return {
@@ -98,42 +103,76 @@ function makeWidget(widget) {
   } else if (widget.widgettype === "flickr") {
     // $(domString).html('<iframe align="center" src="http://www.flickr.com/slideShow/index.gne?user_id=97358734@N03" width="'+ widget.size[0] +'" height="' + widget.size[1] +'" frameBorder="0" scrolling="no"></iframe><br />');
     // return;
-    $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?", {
-      id: "97358734@N03",
-      format: "json"
+    $.getJSON("http://api.flickr.com/services/rest/?method=flickr.photosets.getList", {
+      api_key: MYAPP.flickr_api_key,
+      user_id: "97358734@N03",
+      format: "json",
+      nojsoncallback: 1,
+      per_page: 50
     }, function (data) {
-      $.each(data.items, function (i, item) {
-        $("<img/>").attr({
-          src: item.media.m.replace('_m.', '.')
-        }).appendTo(domString);
-      });
-      var w = $(domString).parent().width();
-      $(domString).slidesjs({
-        width: $(domString).parent().width(),
-        height: $(domString).parent().height(),
-        navigation: {
-          active: false,
-          effect: "fade"
-        },
-        pagination: {
-          active: false
-        },
-        play: {
-          auto: true,
-          interval: params.interval || 5000,
-        }
-      });
+      MYAPP.sets = data.photosets.photoset;
+      MYAPP.setIndex = 0;
+      loadMoreSets(domString);
+
+      console.log(data);
     });
   } else if (widget.widgettype === "countdown") {
     $(domString).countdown({
       until: new Date(parseInt(params.date) * 1000)
     });
-  } else if (widget.widgettype === "image-dynamic"){
-    var myVar=setInterval(function(){
-        $(domString + ' img').attr('src', params.url);
+  } else if (widget.widgettype === "image-dynamic") {
+    var myVar = setInterval(function () {
+      $(domString + ' img').attr('src', params.url);
     }, 4000);
     $(domString).append($("<img/>").attr("src", params.url));
   }
+}
+
+function loadSlideJS(domString){
+  $(domString).slidesjs({
+    width: $(domString).parent().width(),
+    height: $(domString).parent().height(),
+    navigation: {
+      active: false,
+      effect: "fade"
+    },
+    pagination: {
+      active: false
+    },
+    play: {
+      auto: true,
+      interval: 5000,
+    }
+  });
+}
+
+function loadMoreSets(domString){
+  console.log("more sets");
+  if (MYAPP.setIndex >= MYAPP.sets.length )
+    MYAPP.setIndex = 0;
+
+  $.getJSON("http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos", {
+    api_key: MYAPP.flickr_api_key,
+    photoset_id: MYAPP.sets[MYAPP.setIndex].id,//"72157634939324677",
+    extras: "url_m",
+    format: "json",
+    nojsoncallback: 1,
+    per_page: 50
+  }, function (data) {
+    console.log(data.photoset.photo);
+
+    $.each(data.photoset.photo, function (i, item) {
+      $("<img/>").attr({
+        src: item.url_m
+      }).appendTo(domString);
+    });
+
+    var w = $(domString).parent().width();
+    console.log("done");
+
+    loadSlideJS(domString);
+  });
+  MYAPP.setIndex += 1;  
 }
 
 function makeLI(id, row, col, sizex, sizey, title) {

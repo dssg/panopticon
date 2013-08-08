@@ -12,11 +12,11 @@ Board.create(title:"DSSG", content: "First Try",
     Widget.new(title:"First Text", location: [3, 3], size: [2, 2], widgettype: "text", 
       params: {content:"first sample text"}),
     Widget.new(title:"Second Text", location: [3, 1], size: [2, 2], widgettype: "text"),
-#    Widget.new(location: [200,200], size: [200, 200], widgettype: "twitter", :params => {username:"datascifellows", limit: 5})
+    # Widget.new(titlelocation: [200,200], size: [200, 200], widgettype: "twitter", :params => {username:"datascifellows", limit: 5})
     Widget.new(title:"DSSG Flickr", location: [5, 1], size: [2, 2], widgettype: "flickr", 
       :params => {}),
     Widget.new(title:"Until End of Program", location: [1, 1], size: [2, 2], widgettype: "countdown", 
       :params => {date: 1377248400}),
     Widget.new(title: "Image", location: [6,6], size: [2,2], widgettype: "image-dynamic",
-      params: {url: "http://placehold.it/350x150"})
+      params: {url: "https://dl.dropboxusercontent.com/u/59988827/cloud_large.png"})
   ])

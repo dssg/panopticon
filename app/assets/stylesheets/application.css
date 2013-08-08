@@ -9,11 +9,21 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  
- *= require_self
+ 
  *= require jquery.ui.all
  *= require jquery.countdown
  *= require jsoneditor
  *= require jquery.gridster
  *= require bootstrap_and_overrides
+ *= require_self
  *= require_tree .
  */
+
+.json-editor .value { 
+  background-color: #ECF3C3;
+  width: 300px;
+}
+
+.json-editor .property {
+  width: 100px;
+}
