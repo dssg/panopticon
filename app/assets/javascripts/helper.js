@@ -21,15 +21,16 @@ MYAPP.format_changes = function (orig) {
 };
 
 MYAPP.change_size = function (widget, elem, offset) {
+  // the size of a widget should never be 0, so default to 1
   var temp_x = (widget.size[0] + offset[0]) || 1;
   var temp_y = (widget.size[1] + offset[1]) || 1;
-  console.log([temp_x, temp_y]);
 
   widget.size = [temp_x, temp_y];
 
   MYAPP.update_widget(widget._id, {
     size: widget.size
   });
+
   MYAPP.gridster.resize_widget(elem, widget.size[0], widget.size[1]);
 }
 
@@ -42,7 +43,6 @@ function createBox(widget) {
 
   $('.gridster ul').append(makeLI(currentDiv.slice(1), widget.location[0], widget.location[1], widget.size[0], widget.size[1], "test"));
   $(currentDiv + ' .title').text(widget.title);
-
 
   var currentDivAndHeader = currentDiv + ' .header .icon-arrow-';
 
@@ -65,10 +65,8 @@ function createBox(widget) {
         console.log(widget); // send update
       }
     bootbox.alert(divElem, f);
-
     $('.modal-body div').jsonEditor(widget, opt);
   });
-
 
   return currentDiv;
 }
@@ -101,8 +99,7 @@ function makeWidget(widget) {
       }
     });
   } else if (widget.widgettype === "flickr") {
-    // $(domString).html('<iframe align="center" src="http://www.flickr.com/slideShow/index.gne?user_id=97358734@N03" width="'+ widget.size[0] +'" height="' + widget.size[1] +'" frameBorder="0" scrolling="no"></iframe><br />');
-    // return;
+
     $.getJSON("http://api.flickr.com/services/rest/?method=flickr.photosets.getList", {
       api_key: MYAPP.flickr_api_key,
       user_id: "97358734@N03",
@@ -167,7 +164,6 @@ function loadMoreSets(domString){
       }).appendTo(domString);
     });
 
-    var w = $(domString).parent().width();
     console.log("done");
 
     loadSlideJS(domString);
