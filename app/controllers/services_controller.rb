@@ -8,7 +8,9 @@ class ServicesController < ApplicationController
   def flickr_user_photos
 
 
-    sets = flickr.photosets.getList(:user_id => params[:user_id])
+
+    # sets = flickr.photosets.getList(:user_id => params[:user_id])
+    sets = flickr.photosets.getList(:user_id => "97358734@N03")
 
     p sets
 
