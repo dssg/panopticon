@@ -12,8 +12,10 @@ class ServicesController < ApplicationController
 
     p params
 
-    sets = flickr.photosets.getList(:user_id => params[:user_id])
-    # sets = flickr.photosets.getList(:user_id => "97358734@N03")
+    # // params is adding quotes, so :user_id is "\"97358734@N03\""
+
+    # sets = flickr.photosets.getList(:user_id => params[:user_id])
+    sets = flickr.photosets.getList(:user_id => "97358734@N03")
 
     
     ids = []
