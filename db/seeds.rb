@@ -14,7 +14,7 @@ Board.create(title:"DSSG", content: "Second Try",
     # Widget.new(title:"Second Text", location: [3, 1], size: [2, 2], widgettype: "text"),
     # Widget.new(titlelocation: [200,200], size: [200, 200], widgettype: "twitter", :params => {username:"datascifellows", limit: 5})
     Widget.new(title:"DSSG Flickr", location: [5, 1], size: [2, 2], widgettype: "flickr", 
-      :params => {}),
+      :params => {user_id: "97358734@N03"}),
     Widget.new(title:"Until End of Program", location: [1, 1], size: [2, 2], widgettype: "countdown", 
       :params => {date: 1377248400}),
     Widget.new(title: "Image", location: [6,6], size: [2,2], widgettype: "image-dynamic",

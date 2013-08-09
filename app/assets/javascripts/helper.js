@@ -1,7 +1,14 @@
 MYAPP = {};
+
 MYAPP.flickr_api_key = "302a4a49d1f85726239821d77caa7f50";
 
 MYAPP.update_widget = function (widget_id, json) {
+  if (json.size) {
+    MYAPP.widgets[widget_id].size = json.size;
+  } else if (json.location){
+    MYAPP.widgets[widget_id].location = json.location;
+  }
+
   PUT(window.location.pathname + '/widgets/' + widget_id, json);
 };
 
@@ -20,22 +27,19 @@ MYAPP.format_changes = function (orig) {
   };
 };
 
-MYAPP.change_size = function (widget, elem, offset) {
+function change_size(widget, elem, offset) {
   // the size of a widget should never be 0, so default to 1
   var temp_x = (widget.size[0] + offset[0]) || 1;
   var temp_y = (widget.size[1] + offset[1]) || 1;
 
-  widget.size = [temp_x, temp_y];
+  MYAPP.widgets[widget._id].size = [temp_x, temp_y];
 
-  MYAPP.update_widget(widget._id, {
-    size: widget.size
-  });
+  MYAPP.update_widget(widget._id, {size: widget.size});
 
   MYAPP.gridster.resize_widget(elem, widget.size[0], widget.size[1]);
 }
 
 function createBox(widget) {
-  console.log("creating box");
 
   var currentDiv = "#widgetid-" + widget._id;
   var params = widget.params;
@@ -49,7 +53,7 @@ function createBox(widget) {
 
   $.each(MYAPP.directions, function (index, item) {
     $(currentDivAndHeader + item).click(function () {
-      MYAPP.change_size(widget, $(currentDiv), MYAPP.offsets[index]);
+      change_size(widget, $(currentDiv), MYAPP.offsets[index]);
     });
   });
 
@@ -72,57 +76,23 @@ function createBox(widget) {
   return currentDiv;
 }
 
-function makeWidget(widget) {
+function makeWidgets(){
+  for (id in MYAPP.widgets){
+    makeWidget(id);
+  }
+}
+
+function makeWidget(widget_id) {
+  var widget = MYAPP.widgets[widget_id];
   var domString = createBox(widget) + ' .body';
   var params = widget.params;
   if (widget.widgettype == "text") {
-
-    $(domString).text(params.content).editable(window.location.pathname + '/widgets/' + widget._id, {
-      method: 'PUT',
-      indicator: "Saving...",
-      tooltip: "Click to edit...",
-      onblur: "submit",
-      name: 'new-content',
-      type: 'textarea',
-      data: function (value, settings) {
-        value = value.replace(/(\r\n|\n|\r)/gm, "");
-        return value.replace("<br>", "\n");
-      }
-    });
-  } else if (widget.widgettype == "twitter2") {
-    $(domString + ".ui-dialog-content").css("background-color", "#000");
-    $(domString + ".ui-dialog-content").append('<div id="tweets"></div>');
-    $(domString + ' ' + "#tweets").tweetable({
-      username: params.username,
-      limit: 5,
-      onComplete: function () {
-        // $(domString + ".ui-dialog-content").css("background-color", '');
-      }
-    });
+    MYAPP.WidgetsTemplate.TextBox(widget, domString);
   } else if (widget.widgettype === "flickr") {
-
-    $.getJSON("http://api.flickr.com/services/rest/?method=flickr.photosets.getList", {
-      api_key: MYAPP.flickr_api_key,
-      user_id: "97358734@N03",
-      format: "json",
-      nojsoncallback: 1,
-      per_page: 50
-    }, function (data) {
-      MYAPP.sets = data.photosets.photoset;
-      MYAPP.setIndex = 0;
-      loadMoreSets(domString);
-
-      // console.log(data);
-    });
+    MYAPP.WidgetsTemplate.FlickrBox(widget, domString);
   } else if (widget.widgettype === "countdown") {
-    $(domString).countdown({
-      until: new Date(parseInt(params.date) * 1000)
-    });
+    MYAPP.WidgetsTemplate.CountdownBox(widget, domString);
   } else if (widget.widgettype === "image-dynamic") {
-    var myVar = setInterval(function () {
-      $(domString + ' img').attr('src', params.url);
-    }, 4000);
-    $(domString).append($("<img/>").attr("src", params.url));
   }
 }
 
@@ -157,15 +127,12 @@ function loadMoreSets(domString){
     nojsoncallback: 1,
     per_page: 50
   }, function (data) {
-    // console.log(data.photoset.photo);
 
     $.each(data.photoset.photo, function (i, item) {
       $("<img/>").attr({
         src: item.url_m
       }).appendTo(domString);
     });
-
-    // console.log("done");
 
     loadSlideJS(domString);
   });
