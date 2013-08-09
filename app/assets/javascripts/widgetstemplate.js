@@ -30,8 +30,23 @@ MYAPP.WidgetsTemplate.FlickrBox = function (widget, domString) {
       }).appendTo(domString);
     });
 
-    loadSlideJS(domString);
-  }, "json");
+    $(domString).slidesjs({
+      width: $(domString).parent().width(),
+      height: $(domString).parent().height(),
+      navigation: {
+        active: false,
+        effect: "fade"
+      },
+      pagination: {
+        active: false
+      },
+      play: {
+        auto: true,
+        interval: 1000,
+      }
+    });
+    
+  }, "json"); // json request
 }
 
 MYAPP.WidgetsTemplate.CountdownBox = function (widget, domString) {

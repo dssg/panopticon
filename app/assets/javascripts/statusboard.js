@@ -93,25 +93,8 @@ function makeWidget(widget_id) {
   } else if (widget.widgettype === "countdown") {
     MYAPP.WidgetsTemplate.CountdownBox(widget, domString);
   } else if (widget.widgettype === "image-dynamic") {
+    MYAPP.WidgetsTemplate.ImageDynamicBox(widget, domString);
   }
-}
-
-function loadSlideJS(domString){
-  $(domString).slidesjs({
-    width: $(domString).parent().width(),
-    height: $(domString).parent().height(),
-    navigation: {
-      active: false,
-      effect: "fade"
-    },
-    pagination: {
-      active: false
-    },
-    play: {
-      auto: true,
-      interval: 1000,
-    }
-  });
 }
 
 function makeLI(id, row, col, sizex, sizey, title) {
