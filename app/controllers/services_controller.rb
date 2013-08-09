@@ -8,12 +8,14 @@ class ServicesController < ApplicationController
   def flickr_user_photos
 
 
+    # The params[:user_id] isn't working on the inter
 
-    # sets = flickr.photosets.getList(:user_id => params[:user_id])
-    sets = flickr.photosets.getList(:user_id => "97358734@N03")
+    p params
 
-    p sets
+    sets = flickr.photosets.getList(:user_id => params[:user_id])
+    # sets = flickr.photosets.getList(:user_id => "97358734@N03")
 
+    
     ids = []
     sets.each { |set| ids << set.id}
     
@@ -23,8 +25,6 @@ class ServicesController < ApplicationController
       ps_req = flickr.photosets.getPhotos(:photoset_id => id, :extras => 'url_m')
       photos.concat(ps_req.photo)
     end
-
-    p photos.length
 
     render :json => photos
 
