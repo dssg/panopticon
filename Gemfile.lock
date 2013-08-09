@@ -41,6 +41,7 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    flickraw (0.9.6)
     haml (4.0.3)
       tilt
     haml-rails (0.4)
@@ -147,6 +148,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  flickraw
   haml-rails
   jeditable-rails
   jquery-modal-rails

@@ -17,6 +17,7 @@ gem 'jquery-ui-rails'
 gem 'jquery-modal-rails'
 gem 'jeditable-rails'
 gem 'slidesjs-rails'
+gem 'flickraw'
 
 # Gems used only for assets and not required
 # in production environments by default.

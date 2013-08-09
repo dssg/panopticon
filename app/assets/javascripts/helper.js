@@ -109,34 +109,9 @@ function loadSlideJS(domString){
     },
     play: {
       auto: true,
-      interval: 5000,
+      interval: 1000,
     }
   });
-}
-
-function loadMoreSets(domString){
-  console.log("more sets");
-  if (MYAPP.setIndex >= MYAPP.sets.length )
-    MYAPP.setIndex = 0;
-
-  $.getJSON("http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos", {
-    api_key: MYAPP.flickr_api_key,
-    photoset_id: MYAPP.sets[MYAPP.setIndex].id,//"72157634939324677",
-    extras: "url_m",
-    format: "json",
-    nojsoncallback: 1,
-    per_page: 50
-  }, function (data) {
-
-    $.each(data.photoset.photo, function (i, item) {
-      $("<img/>").attr({
-        src: item.url_m
-      }).appendTo(domString);
-    });
-
-    loadSlideJS(domString);
-  });
-  MYAPP.setIndex += 1;  
 }
 
 function makeLI(id, row, col, sizex, sizey, title) {

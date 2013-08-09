@@ -1,4 +1,7 @@
 Statusboard::Application.routes.draw do
+  # post "services/flickr_user_photos" => "services#flickr_user_photos", :via => :post
+  post "services/flickr_user_photos", :via => :post 
+
   resources :boards do
     resources :widgets
   end
