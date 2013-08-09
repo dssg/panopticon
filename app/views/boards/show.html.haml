@@ -1,0 +1,27 @@
+#board-page
+
+.gridster
+  %ul
+
+%p#notice= notice
+%p
+  %b Name:
+  = @board.name
+%p
+  %b Content:
+  = @board.content
+
+- @board.widgets.each do |widget|
+  = widget.attributes
+  %br
+
+#content
+- 5.times do
+  %br
+
+= link_to 'Edit', edit_board_path(@board)
+|
+\#{link_to 'Back', boards_path}
+
+#counter
+

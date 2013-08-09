@@ -1,0 +1,29 @@
+// Place all the styles related to the boards controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.box {
+  margin: 0px;
+  padding: 0px;
+  background-color: gray;
+}
+
+.icons {
+  right: 0px;
+}
+
+.body{
+//  height: 95%;
+}
+
+.header {
+  -webkit-user-select: none; /* Chrome/Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+li .body{
+  overflow:hidden;
+}
