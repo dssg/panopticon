@@ -42,7 +42,7 @@ MYAPP.WidgetsTemplate.FlickrBox = function (widget, domString) {
       },
       play: {
         auto: true,
-        interval: 1000,
+        interval: widget.params.interval,
       }
     });
     
