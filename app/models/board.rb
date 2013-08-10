@@ -1,6 +1,6 @@
 class Board
   include Mongoid::Document
-  field :name
+  field :title
   field :content
 
   embeds_many :widgets

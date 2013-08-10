@@ -7,7 +7,7 @@
 #   Mayor.create(title:'Emanuel', city: cities.first)
 
 
-Board.create(title:"DSSG", content: "Second Try", 
+Board.create(title:"DSSG", description: "", 
   widgets: [
     Widget.new(title:"Sample Text", location: [3, 3], size: [2, 2], widgettype: "text", 
       params: {content:"Made by Vidhur!"}),
