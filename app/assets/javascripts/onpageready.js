@@ -9,7 +9,7 @@ $(document).ready(function(){
         MYAPP.widgets[data[index].id] = data[index];
       }
       
-      makeWidgets();
+      MYAPP.makeWidgets();
     }); 
 
     $(".gridster ul").gridster({
@@ -22,7 +22,7 @@ $(document).ready(function(){
         draggable: {
           handle: 'div.header',
           stop: function(event, ui){
-            update_all();
+            MYAPP.update_all();
           },
         },
         serialize_params: function($w, wgd) {

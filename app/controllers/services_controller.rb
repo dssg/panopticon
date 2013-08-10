@@ -7,11 +7,8 @@ class ServicesController < ApplicationController
 
   def flickr_user_photos
 
-    # The params[:user_id] isn't working on the inter
+    # The params[:user_id] isn't working on the heroku
 
-    p params
-
-    p $temp, "temp"
     if $temp
       p "using cache"
       photos = $temp
@@ -36,7 +33,7 @@ class ServicesController < ApplicationController
 
     end
 
-    render :json => photos
+    render :json => photos.shuffle
 
   end
 end

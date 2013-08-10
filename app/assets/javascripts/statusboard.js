@@ -29,17 +29,17 @@ MYAPP.update_widget = function (widget_id, updated_properties) {
   console.log("sending all" + JSON.stringify(MYAPP.widgets[widget_id]));
 };
 
-function change_size(widget_id, offset) {
-  var temp_size = get_size(widget_id);
+MYAPP.change_size = function (widget_id, offset) {
+  var temp_size = MYAPP.get_size(widget_id);
 
   // the size of a widget should never be 0, so default to 1
   var temp_x = (temp_size[0] + offset[0]) || 1;
   var temp_y = (temp_size[1] + offset[1]) || 1;
 
-  MYAPP.gridster.resize_widget($("#widgetid-" + widget_id), temp_x, temp_y, update_all);
+  MYAPP.gridster.resize_widget($("#widgetid-" + widget_id), temp_x, temp_y, MYAPP.update_all);
 }
 
-function get_size(widget_id){
+MYAPP.get_size = function(widget_id){
   var index = 0;
   var serialize = MYAPP.gridster.serialize();
   for (index = 0; index < serialize.length; index++){
@@ -48,13 +48,13 @@ function get_size(widget_id){
   }
 }
 
-function update_all(){
+MYAPP.update_all = function(){
   $.each(MYAPP.gridster.serialize(), function(index, item){
     MYAPP.update_widget(item.id, item);
   });
 }
 
-function createBox(widget) {
+MYAPP.createBox = function(widget){
 
   var domID = "#widgetid-" + widget.id;
 
@@ -63,14 +63,14 @@ function createBox(widget) {
   MYAPP.gridster = $(".gridster ul").gridster().data('gridster');
 
   // slice currentDiv to remove #
-  $('.gridster ul').append(makeLI(domID.slice(1), widget.location[0], widget.location[1], widget.size[0], widget.size[1], "test"));
+  $('.gridster ul').append(MYAPP.makeLI(domID.slice(1), widget.location[0], widget.location[1], widget.size[0], widget.size[1], "test"));
   $(domID + ' .title').text(widget.title);
 
   var domIDAndHeader = domID + ' .header .icon-arrow-';
 
   $.each(MYAPP.directions, function (index, item) {
     $(domIDAndHeader + item).click(function () {
-      change_size(widget.id, MYAPP.offsets[index]);
+      MYAPP.change_size(widget.id, MYAPP.offsets[index]);
     });
   });
 
@@ -94,15 +94,15 @@ function createBox(widget) {
   return domID;
 }
 
-function makeWidgets(){
+MYAPP.makeWidgets = function(){
   for (widget in MYAPP.widgets){
-    makeWidget(widget);
+    MYAPP.makeWidget(widget);
   }
 }
 
-function makeWidget(widget_id) {
+MYAPP.makeWidget = function(widget_id){
   var widget = MYAPP.widgets[widget_id];
-  var domString = createBox(widget) + ' .body';
+  var domString = MYAPP.createBox(widget) + ' .body';
   var params = widget.params;
   if (widget.widgettype == "text") {
     MYAPP.WidgetsTemplate.TextBox(widget, domString);
@@ -115,7 +115,7 @@ function makeWidget(widget_id) {
   }
 }
 
-function makeLI(id, col, row, size_x, size_y, title) {
+MYAPP.makeLI = function (id, col, row, size_x, size_y, title) {
   var real_content = '<div class="header"><span class="title">Title</span><span class="icons pull-right">';
   real_content += '<i class="icon-arrow-up"></i><i class="icon-arrow-left"></i><i class="icon-arrow-down"></i><i class="icon-arrow-right"></i><i class="icon-wrench"></i></div></div>';
   real_content += '<div class="body"></div>';

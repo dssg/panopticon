@@ -62,8 +62,15 @@ MYAPP.WidgetsTemplate.CountdownBox = function (widget, domString) {
 }
 
 MYAPP.WidgetsTemplate.ImageDynamicBox = function (widget, domString) {
-  var myVar = setInterval(function () {
-    $(domString + ' img').attr('src', widget.params.url);
-  }, widget.params.interval);
-  $(domString).append($("<img/>").attr("src", widget.params.url));
+
+  $.get(widget.params.url).done(function(){
+    var myVar = setInterval(function () {
+      $(domString + ' img').attr('src', widget.params.url);
+    }, widget.params.interval);
+    $(domString).append($("<img/>").attr("src", widget.params.url));  
+  }).fail(function(){
+    console.log("image won't load");
+  });
+
+  
 }
