@@ -3,6 +3,7 @@ $(document).ready(function(){
   if ($('#board-page').length){
     $.get(window.location.pathname + '/widgets', {}, function(data){
       data = MYAPP.format_mongo_json(data);
+      // Adding widgets locally
       MYAPP.widgets = {};
       var index = 0;
       for (index = 0; index < data.length; index++){

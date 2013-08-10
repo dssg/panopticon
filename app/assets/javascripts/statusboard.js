@@ -18,6 +18,7 @@ MYAPP.format_mongo_json = function(data){
 MYAPP.update_widget = function (widget_id, updated_properties) {
   var index = widget_id.indexOf('-');
 
+  // slicing out the #widgetid- part if it exists, should be taken out later
   if (index >= 0){
     widget_id = widget_id.slice(index + 1);
   }
@@ -56,25 +57,25 @@ MYAPP.update_all = function(){
 
 MYAPP.createBox = function(widget){
 
-  var domID = "#widgetid-" + widget.id;
+  var widgetDomID = "#widgetid-" + widget.id;
 
   var params = widget.params;
 
   MYAPP.gridster = $(".gridster ul").gridster().data('gridster');
 
   // slice currentDiv to remove #
-  $('.gridster ul').append(MYAPP.makeLI(domID.slice(1), widget.location[0], widget.location[1], widget.size[0], widget.size[1], "test"));
-  $(domID + ' .title').text(widget.title);
+  $('.gridster ul').append(MYAPP.makeLI(widgetDomID.slice(1), widget.location[0], widget.location[1], widget.size[0], widget.size[1], "This text should be replaced"));
+  $(widgetDomID + ' .title').text(widget.title);
 
-  var domIDAndHeader = domID + ' .header .icon-arrow-';
+  var widgetDomIDAndHeader = widgetDomID + ' .header .icon-arrow-';
 
   $.each(MYAPP.directions, function (index, item) {
-    $(domIDAndHeader + item).click(function () {
+    $(widgetDomIDAndHeader + item).click(function () {
       MYAPP.change_size(widget.id, MYAPP.offsets[index]);
     });
   });
 
-  $(domID + ' .header .icon-wrench').click(function () {
+  $(widgetDomID + ' .header .icon-wrench').click(function () {
     var opt = {
       change: function (data) {
         MYAPP.widgets[widget.id] = data;
@@ -91,7 +92,7 @@ MYAPP.createBox = function(widget){
     $('.modal-body div').jsonEditor(widget, opt);
   });
 
-  return domID;
+  return widgetDomID;
 }
 
 MYAPP.makeWidgets = function(){
