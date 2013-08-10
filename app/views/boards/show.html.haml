@@ -5,11 +5,11 @@
 
 %p#notice= notice
 %p
-  %b Name:
-  = @board.name
+  %b Title:
+  = @board.title
 %p
-  %b Content:
-  = @board.content
+  %b Description:
+  = @board.description
 
 - @board.widgets.each do |widget|
   = widget.attributes
