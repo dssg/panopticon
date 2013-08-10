@@ -2,7 +2,9 @@ MYAPP.WidgetsTemplate = {}
 
 MYAPP.WidgetsTemplate.TextBox = function (widget, domString) {
 
-  $(domString).text(widget.params.content).editable(window.location.pathname + '/widgets/' + widget._id, {
+  var url = window.location.pathname + '/widgets/' + widget.id;
+
+  $(domString).text(widget.params.content).editable(url, {
     method: 'PUT',
     indicator: "Saving...",
     tooltip: "Click to edit...",
@@ -29,7 +31,7 @@ MYAPP.WidgetsTemplate.FlickrBox = function (widget, domString) {
       }).appendTo(domString);
     });
 
-    $(domString).slidesjs({
+    var x = $(domString).slidesjs({
       width: $(domString).parent().width(),
       height: $(domString).parent().height(),
       navigation: {
@@ -41,7 +43,7 @@ MYAPP.WidgetsTemplate.FlickrBox = function (widget, domString) {
       },
       play: {
         auto: true,
-        interval: 100000,// widget.params.interval,
+        interval: widget.params.interval,
       },
       callback: {
         start: function(num){

@@ -78,6 +78,14 @@ class WidgetsController < ApplicationController
     if params[:size]
       @widget.size = params[:size]
     end
+
+    if params[:params]
+      @widget.params = params[:params]
+    end
+
+    if params[:title]
+      @widget.title = params[:title]
+    end
     
     if params[:"new-content"]
       p params["new-content"]
@@ -91,7 +99,7 @@ class WidgetsController < ApplicationController
     @widget.save
 
     p "in update"
-    render :text => "yay"
+    render :text => "updated"
     # respond_to do |format|
     #   if @widget.update_attributes(params[:widget])
     #     format.html { redirect_to @widget, notice: 'Widget was successfully updated.' }

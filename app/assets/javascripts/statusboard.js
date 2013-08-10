@@ -58,7 +58,6 @@ function createBox(widget) {
 
   var domID = "#widgetid-" + widget.id;
 
-  MYAPP.widgets[widget.id].domElem = domID;
   var params = widget.params;
 
   MYAPP.gridster = $(".gridster ul").gridster().data('gridster');
@@ -78,8 +77,7 @@ function createBox(widget) {
   $(domID + ' .header .icon-wrench').click(function () {
     var opt = {
       change: function (data) {
-        // MYAPP.widgets[widget.id] = data;
-        // MYAPP.update_widget(widget.id);
+        MYAPP.widgets[widget.id] = data;
       },
       propertyclick: function (path) { /* called when a property is clicked with the JS path to that property */
         console.log(path);
@@ -87,7 +85,7 @@ function createBox(widget) {
     };
     var jsonEditorElem = $(document.createElement('div')).addClass("json-editor");
     var f = function () {
-        console.log(widget); // send update
+        PUT(window.location.pathname + '/widgets/' + widget.id, MYAPP.widgets[widget.id]);
       }
     bootbox.alert(jsonEditorElem, f);
     $('.modal-body div').jsonEditor(widget, opt);
