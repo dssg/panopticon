@@ -7,6 +7,12 @@ class WidgetsController < ApplicationController
     @board = Board.find(params[:board_id])
     @widgets = @board.widgets
 
+    # @widgets = @widgets.to_json
+    # p @widgets.first.delete(:_id)
+    # @widgets.each{|widget| widget.store(:id, widget.delete(:_id))}
+
+
+
     render json: @widgets
 
     # respond_to do |format|
@@ -67,9 +73,13 @@ class WidgetsController < ApplicationController
 
     if params[:location] 
       @widget.location = params[:location]
-    elsif params[:size]
+    end
+     
+    if params[:size]
       @widget.size = params[:size]
-    elsif params[:"new-content"]
+    end
+    
+    if params[:"new-content"]
       p params["new-content"]
       @widget.params["content"] = params[:"new-content"]
       @widget.save

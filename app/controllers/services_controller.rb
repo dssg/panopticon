@@ -7,25 +7,33 @@ class ServicesController < ApplicationController
 
   def flickr_user_photos
 
-
     # The params[:user_id] isn't working on the inter
 
     p params
 
-    # // params is adding quotes, so :user_id is "\"97358734@N03\""
+    p $temp, "temp"
+    if $temp
+      p "using cache"
+      photos = $temp
+    else 
 
-    # sets = flickr.photosets.getList(:user_id => params[:user_id])
-    sets = flickr.photosets.getList(:user_id => "97358734@N03")
+      # // params is adding quotes, so :user_id is "\"97358734@N03\""
 
-    
-    ids = []
-    sets.each { |set| ids << set.id}
-    
-    photos = []
+      # sets = flickr.photosets.getList(:user_id => params[:user_id])
+      sets = flickr.photosets.getList(:user_id => "97358734@N03")
 
-    ids.each do |id|
-      ps_req = flickr.photosets.getPhotos(:photoset_id => id, :extras => 'url_m')
-      photos.concat(ps_req.photo)
+      
+      ids = []
+      sets.each { |set| ids << set.id}
+      
+      photos = []
+
+      ids.each do |id|
+        ps_req = flickr.photosets.getPhotos(:photoset_id => id, :extras => 'url_m')
+        photos.concat(ps_req.photo)
+      end
+      $temp = photos
+
     end
 
     render :json => photos

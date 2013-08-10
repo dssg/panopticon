@@ -23,4 +23,5 @@
 //= require jquery.gridster
 //= require bootbox.min
 //= require sprintf
+//= require jquery.imagefit-0.2
 //= require_tree .

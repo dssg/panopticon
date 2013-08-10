@@ -2,34 +2,28 @@ $(document).ready(function(){
 
   if ($('#board-page').length){
     $.get(window.location.pathname + '/widgets', {}, function(data){
+      data = MYAPP.format_mongo_json(data);
       MYAPP.widgets = {};
       var index = 0;
       for (index = 0; index < data.length; index++){
-        MYAPP.widgets[data[index]._id] = data[index];
+        MYAPP.widgets[data[index].id] = data[index];
       }
       
       makeWidgets();
     }); 
 
-
-
-    var x = $(".gridster ul").gridster({
+    $(".gridster ul").gridster({
         widget_margins: [5,5],
         widget_base_dimensions: [140, 140],
+        max_cols: 20,
+        max_rows: 20,
+        max_size_x: 10,
+        max_size_y: 10,
         draggable: {
           handle: 'div.header',
           stop: function(event, ui){
-            console.log(this.serialize_changed());
-            $.each(this.serialize_changed(), function(index, item){
-              var id = item.id.slice(item.id.indexOf('-')+1);
-              MYAPP.update_widget(id, MYAPP.format_changes(item));
-            });
+            update_all();
           },
-        },
-        collision: {
-          // on_overlap_stop: function(event, ui){
-            
-          // }
         },
         serialize_params: function($w, wgd) {
               return {
@@ -37,11 +31,10 @@ $(document).ready(function(){
                   row: wgd.row,
                   size_x: wgd.size_x,
                   size_y: wgd.size_y,
-                  id: $($w).attr('id'),
+                  id: $($w).attr('id')
               };
           },
     });
 
   };
-
 });

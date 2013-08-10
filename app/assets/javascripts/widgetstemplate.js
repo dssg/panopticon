@@ -21,10 +21,9 @@ MYAPP.WidgetsTemplate.FlickrBox = function (widget, domString) {
   $.post("/services/flickr_user_photos", {
     user_id: widget.params.user_id
   }, function (data) {
-    MYAPP.sets = data;
+    MYAPP.photos = data;
 
-    MYAPP.setIndex = 0;
-    $.each(MYAPP.sets, function (i, item) {
+    $.each(MYAPP.photos, function (i, item) {
       $("<img/>").attr({
         src: item.url_m
       }).appendTo(domString);
@@ -42,7 +41,12 @@ MYAPP.WidgetsTemplate.FlickrBox = function (widget, domString) {
       },
       play: {
         auto: true,
-        interval: widget.params.interval,
+        interval: 100000,// widget.params.interval,
+      },
+      callback: {
+        start: function(num){
+          $(sprintf("[slidesjs-index=%d]", num)).imagefit(); // not working
+        }
       }
     });
     
