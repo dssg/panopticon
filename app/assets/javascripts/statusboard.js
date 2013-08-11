@@ -75,6 +75,7 @@ MYAPP.createBox = function(widget){
     });
   });
 
+  // Settings event listener, makes json editor view and registers callback
   $(widgetDomID + ' .header .icon-wrench').click(function () {
     var opt = {
       change: function (data) {
@@ -82,14 +83,22 @@ MYAPP.createBox = function(widget){
       },
       propertyclick: function (path) { /* called when a property is clicked with the JS path to that property */
         console.log(path);
-      }
+      },
+      propertyElement: '<input>' // element of the property field, <input> is default
+
     };
     var jsonEditorElem = $(document.createElement('div')).addClass("json-editor");
+
     var f = function () {
         PUT(window.location.pathname + '/widgets/' + widget.id, MYAPP.widgets[widget.id]);
       }
     bootbox.alert(jsonEditorElem, f);
     $('.modal-body div').jsonEditor(widget, opt);
+
+    // disabling editing of json property values
+    $('.json-editor input.property').each(function(index, item){
+      $(item).attr('disabled', true);
+    });
   });
 
   return widgetDomID;

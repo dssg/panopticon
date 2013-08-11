@@ -42,7 +42,7 @@ MYAPP.WidgetsTemplate.Flickr = function (widget, domString) {
         effect: "fade"
       },
       pagination: {
-        active: false
+        active: false,
       },
       play: {
         auto: true,
@@ -70,7 +70,6 @@ MYAPP.WidgetsTemplate.Countdown = function (widget, domString) {
 MYAPP.WidgetsTemplate.ImageDynamic = function (widget, domString) {
 
   $(domString).addClass("widget-imagedynamic");
-
 
   $.get(widget.params.url).done(function(){
     var myVar = setInterval(function () {
