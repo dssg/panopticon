@@ -2,6 +2,7 @@ MYAPP.WidgetsTemplate = {}
 
 MYAPP.WidgetsTemplate.TextBox = function (widget, domString) {
 
+  $(domString).addClass("widget-textbox");
   var url = window.location.pathname + '/widgets/' + widget.id;
 
   $(domString).text(widget.params.content).editable(url, {
@@ -18,7 +19,9 @@ MYAPP.WidgetsTemplate.TextBox = function (widget, domString) {
   });
 }
 
-MYAPP.WidgetsTemplate.FlickrBox = function (widget, domString) {
+MYAPP.WidgetsTemplate.Flickr = function (widget, domString) {
+
+  $(domString).addClass("widget-flickr");
 
   $.post("/services/flickr_user_photos", {
     user_id: widget.params.user_id
@@ -55,13 +58,19 @@ MYAPP.WidgetsTemplate.FlickrBox = function (widget, domString) {
   }, "json"); // json request
 }
 
-MYAPP.WidgetsTemplate.CountdownBox = function (widget, domString) {
+MYAPP.WidgetsTemplate.Countdown = function (widget, domString) {
+
+  $(domString).addClass("widget-countdown");
+
   $(domString).countdown({
     until: new Date(parseInt(widget.params.date) * 1000)
   });
 }
 
-MYAPP.WidgetsTemplate.ImageDynamicBox = function (widget, domString) {
+MYAPP.WidgetsTemplate.ImageDynamic = function (widget, domString) {
+
+  $(domString).addClass("widget-imagedynamic");
+
 
   $.get(widget.params.url).done(function(){
     var myVar = setInterval(function () {
@@ -72,5 +81,4 @@ MYAPP.WidgetsTemplate.ImageDynamicBox = function (widget, domString) {
     console.log("image won't load");
   });
 
-  
 }

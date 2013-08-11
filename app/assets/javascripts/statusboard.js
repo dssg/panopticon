@@ -108,17 +108,18 @@ MYAPP.makeWidget = function(widget_id){
   if (widget.widgettype == "text") {
     MYAPP.WidgetsTemplate.TextBox(widget, domString);
   } else if (widget.widgettype === "flickr") {
-    MYAPP.WidgetsTemplate.FlickrBox(widget, domString);
+    MYAPP.WidgetsTemplate.Flickr(widget, domString);
   } else if (widget.widgettype === "countdown") {
-    MYAPP.WidgetsTemplate.CountdownBox(widget, domString);
+    MYAPP.WidgetsTemplate.Countdown(widget, domString);
   } else if (widget.widgettype === "image-dynamic") {
-    MYAPP.WidgetsTemplate.ImageDynamicBox(widget, domString);
+    MYAPP.WidgetsTemplate.ImageDynamic(widget, domString);
   }
 }
 
 MYAPP.makeLI = function (id, col, row, size_x, size_y, title) {
   var real_content = '<div class="header"><span class="title">Title</span><span class="icons pull-right">';
-  real_content += '<i class="icon-arrow-up"></i><i class="icon-arrow-left"></i><i class="icon-arrow-down"></i><i class="icon-arrow-right"></i><i class="icon-wrench"></i></div></div>';
+  real_content += '<i class="icon-arrow-up"></i><i class="icon-arrow-left"></i><i class="icon-arrow-down"></i><i class="icon-arrow-right"></i><i class="icon-wrench"></i></div>';
+  real_content += '</div>';
   real_content += '<div class="body"></div>';
   return MYAPP.gridster.add_widget(sprintf('<li id="%s" class="new">%s</li>', id, real_content), size_x, size_y, col, row);
 }
